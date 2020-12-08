@@ -11,3 +11,56 @@ function sumTwoSmallestNumbers(numbers) {
 function sumTwoSmallestNumbers(numbers) {  
   return numbers.filter(number => number > 0).sort((a, b) => a - b).slice(0, 2).reduce((a, c) => a + c)
 }
+
+function high(x){
+  let words = x.split(" ")
+  let h = count(words[0])
+  let a = words[0]
+  for(let i = 1; i < words.length; i++){
+    if(h < count(words[i])){
+      h = count(words[i])
+      a = words[i]
+    }
+  }
+  return a
+}
+
+function count(word){
+  let alpha = " " + [...Array(26)].map(_=>(++i).toString(36),i=9).join``
+  let counter = 0
+  for(let i = 0; i < word.length; i++){
+    counter += alpha.indexOf(word[i])
+  }
+  return counter
+}
+
+function high(x){
+  //transform the input string into array & define a string of alphabetical latin characters
+  var arr = x.split(' ');
+  var str = 'abcdefghijklmnopqrstuvwxyz';
+  //Iterate through the array with input words to find the one with the greatest sum
+  var newArr = arr.map(function(word){
+    var sum = 0;
+    for (var i = 0; i < word.length; i++) {
+      sum += str.indexOf(word[i]);
+    }
+    return sum;
+  });
+  //Return the word with the greatest sum
+  return arr[newArr.indexOf(Math.max(...newArr))];
+}
+
+function high(s){
+  let as = s.split(' ').map(s=>[...s].reduce((a,b)=>a+b.charCodeAt(0)-96,0));
+  return s.split(' ')[as.indexOf(Math.max(...as))];
+}
+
+function high(x){
+    return x.split(' ').reduce((accum, current)=>{
+        return score(current) > score(accum)? current:accum;  
+    })
+}
+
+function score(word){
+    return word.split('').reduce((accum,current)=>{return accum+(current.charCodeAt()-96)},0)
+}
